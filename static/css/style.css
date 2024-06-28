@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+:root{
+  --primary-text-color: #183B56;
+  --secondry-text-color: #577592;
+  --accent-color: #de3445;
+  --accent-color-dark: #285886;
+}
+
+/*--- util css ---*/
+
+.container{
+  max-width: 90%;
+  margin: auto;
+}
+
+.flex{
+  display: flex;
+  align-items: center;
+}
+
+.primary-btn{
+  background-color: var(--accent-color-dark);
+  color: #fff;
+  padding: 0.8vw 1.7vw;
+  border-radius: 2px;
+}
+.primary-btn:hover{
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+/*---- navbar----*/
+
+.container{
+  justify-content: space-between;
+}
+
+nav{
+  z-index: 999;
+  max-width: 100%;
+  margin: auto;
+  padding: 1.5vw 0;
+  background: ghostwhite;
+  height: 6.5vw;
+  position: sticky;
+  top: 0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.logo{
+  font-size: 2.3vw;
+  font-weight: 700;
+  color: var(--secondry-text-color);
+}
+
+ul {
+  gap: 2vw;
+}
+
+ul li{
+  list-style: none;
+}
+
+ul li a{
+  font-size: 1.27vw;
+  font-weight: 500;
+  color: var(--primary-text-color);
+  transition: 0.2s ease-in-out;
+}
+ul li a:hover{
+  color: var(--accent-color);
+}
+
+.burger{
+  font-size: 2vw;
+  margin-top: 0.5vw;
+  padding: 3px 7px;
+  cursor: pointer;
+  display: none;
+}
+
+@media (max-width: 650px) {
+  
+  nav{
+    width: 100%;
+    height: 60px;
+    position: sticky;
+    top: 0;
+  }
+  
+  .logo{
+    font-size: 4.4vw;
+    margin-top: 5px;
+  }
+  
+  .nav-list{
+    position: absolute;
+    flex-direction: column;
+    top: 60px;
+    background: ghostwhite;
+    left: -100%;
+    width: 70%;
+    height: calc(100vh - 60px);
+    padding-block: 15px;
+    transition:left 0.2s ease-in-out;
+    box-shadow: rgba(0, 0, 0, 0.1) 
+  }
+  
+  .active{
+    left: 0;
+    transition:left 0.2s ease-out;
+  }
+
+  .links ul li{
+  }
+  
+  .links ul li a{
+    text-align: center;
+    display: inline-block;
+    font-size: 3vw;
+    width: 100%;
+    margin-block: 15px;
+    padding: 15px 50px;
+  }
+  
+  .nav-links{
+    padding: 15px 100px;
+  }
+  
+  .burger{
+    display: block;
+    font-size: 20px;
+  }
+  
+  .primary-btn{
+    padding: 3vw 6vw;
+  }
+}
+
+
+

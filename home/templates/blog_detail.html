@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Blog Post Details{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    
+     <link rel="stylesheet" href="/static/css/style.css">
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+    .card {
+      width: 95%;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+    }
+    .card h1 {
+      font-size: 24px;
+      color: #333;
+    }
+    .card p {
+      font-size: 10px;
+      line-height: 2;
+      color: #666;
+      margin: 10px 0;
+    }
+    .feature-image {
+      width: 100%;
+      height: auto;
+      margin: 20px 0;
+    }
+    .author-info {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .author-info img {
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+    .author-info .author-name {
+      font-size: 16px;
+      color: #333;
+    }
+   
+   
+   /* General styles */
+
+
+
+/* General styles */
+
+/* Comments section */
+.comments-section {
+  max-width: 70%;
+  margin: 10px auto;
+  margin-top: 30px;
+  border-top: 2px solid #ddd;
+  padding-top: 20px;
+}
+
+.comment {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.comment strong {
+  font-weight: bold;
+  color: #333;
+}
+
+.comment p {
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.comment small {
+  color: #888;
+}
+
+.comment-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comment-footer span {
+  font-size: 0.8em;
+  color: #888;
+}
+
+/* Comment form */
+.comment-form {
+  max-width: 70%;
+  margin-bottom: 20px;
+  margin: 10px auto;
+  margin-top: 30px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.comment-form h3 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.comment-form label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.comment-form input[type="text"],
+.comment-form input[type="email"],
+.comment-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 0.95em;
+}
+
+.comment-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.comment-form button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+.comment-form button:hover {
+  background-color: #45a049;
+}
+
+
+   
+   
+   
+   
+   
+   
+   
+    </style>
+</head>
+<body>
+<nav>
+  <div class="container flex">
+    <a class="logo" href="/">Qui<span>lee</span></a>
+    <div class="links">
+      <ul class="flex nav-list">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="#" class="nav-link">Store</a></li>
+        <li><a href="#" class="nav-link">About</a></li>
+        <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+
+      </ul>
+    </div>
+    <div class="burger" onclick="active()">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+  </div>
+</nav>
+<div class="card">
+    <h1>{{ post.title }}</h1>
+     <div class="author-info">
+        
+        <div class="author-name">Written by {{ post.author }} on {{ post.created_at }}</div>
+    </div>
+    
+    <img src="{{ post.feature_image.url }}" alt="{{ post.title }}" class="feature-image">
+    <p>{{ post.content }}</p>
+   
+</div>
+
+
+<!-- Assuming you have a blog post instance passed to the template as 'blog_post' -->
+<h2>{{ blog_post.title }}</h2>
+<p>{{ blog_post.content }}</p>
+
+<!-- Comments Section -->
+
+
+
+<!-- Display comments -->
+<div class="comments-section">
+  <h3>Comments:</h3>
+  <ul>
+    {% for comment in post.comments.all %}
+      <li class="comment">
+        <strong>{{ comment.name }}</strong> said:
+        <p>{{ comment.content }}</p>
+        <small>{{ comment.created_at }}</small>
+      </li>
+    {% empty %}
+      <li>No comments yet.</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<!-- Form for adding a new comment -->
+<div class="comment-form">
+  <h3>Add a Comment:</h3>
+  <form method="post" action="">
+    {% csrf_token %}
+    <div>
+      <label for="id_name">Name:</label>
+      <input type="text" id="id_name" name="name" required>
+    </div>
+    <div>
+      <label for="id_email">Email:</label>
+      <input type="email" id="id_email" name="email" required>
+    </div>
+    <div>
+      <label for="id_content">Comment:</label>
+      <textarea id="id_content" name="content" rows="3" required></textarea>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+
+
+
+
+
+<script src="/static/js/main.js"></script>
+</body>
+</html>

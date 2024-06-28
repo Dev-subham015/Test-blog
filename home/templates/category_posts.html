@@ -1,0 +1,29 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Posts in {{ category.name }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Posts in {{ category.name }}</h1>
+    </header>
+    <nav>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'contact' %}">Contact</a>
+    </nav>
+    <div class="container">
+        <ul>
+            {% for post in posts %}
+                <li>
+                    <h3><a href="{% url 'blog_detail' slug=post.slug %}">{{ post.title }}</a></h3>
+                    <p>{{ post.content|slice:":100" }}...</p>
+                    <img src="{{ post.feature_image.url }}" alt="Feature Image">
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
